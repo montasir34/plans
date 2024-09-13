@@ -1,7 +1,7 @@
 'use client'
 import { IoIosNotifications, IoMdAdd } from "react-icons/io";
 import { Avatar } from "@/components/ui/avatar";
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { AvatarImage } from "@radix-ui/react-avatar";
 import Header from "@/components/ui/Header";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
