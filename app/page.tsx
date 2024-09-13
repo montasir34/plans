@@ -17,7 +17,7 @@ export default function Home() {
         <input className="outline-none h-8 pl-2 border-b-2 border-yellow-300" name="email" type="email" placeholder="Email" />
       )}
       <input className="outline-none h-8 pl-2 border-b-2 border-yellow-300" name="password" type="password" placeholder="password" />
-      <Button title="sign in" />
+      <Button className="bg-[#CB8C06] hover:bg-[#8c6205]">sign in</Button>
       <p onClick={() => setVariant(p => p === 'LOGIN' ? 'REGISTER' : 'LOGIN')}
         className="text-xs mt-3 text-blue-600 underline underline-offset-2 hover:text-blue-800 cursor-pointer">
         {variant === 'LOGIN' ? 'you dont have an account ?' : 'Already have an account ?'}
