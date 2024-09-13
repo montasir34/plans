@@ -3,10 +3,9 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function createPlanLayout({ children }: { children: React.ReactNode }) {
+export default function CreatePlanLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
     const programpath = pathname === '/main/create-plan/program'
-    const createpath = pathname === '/main/create-plan'
     return <>
         <div className="flex items-center h-screen flex-col mt-11">
             <div className={` flex -z-20 p-2 items-center w-[140px]`}>
