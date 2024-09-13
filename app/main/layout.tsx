@@ -12,11 +12,11 @@ export default function MainLayout({
     children: React.ReactNode;
 }>) {
     const pathname = usePathname()
-    const createplanPath = pathname !== '/main/create-plan'
+    const mainPath = pathname === '/main'
     return <div className="h-screen w-full">
         <Header>
             <div className="flex gap-4 items-center">
-                {createplanPath && <Link href='/main/create-plan' className="px-3 py-1 mr-3 flex items-center gap-1 border-2 border-[#CB8C06] text-[#CB8C06] ">
+                {mainPath && <Link href='/main/create-plan' className="px-3 py-1 mr-3 flex items-center gap-1 border-2 border-[#CB8C06] text-[#CB8C06] ">
                     Add plan
                     <IoMdAdd className="text-xl" />
                 </Link>}
