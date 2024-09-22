@@ -3,13 +3,14 @@
 import React, { useState } from 'react'
 import { Label } from './label';
 import { Input } from './input';
+import { PlanAction } from '@/app/main/create-plan/page';
 
-function Radio() {
+function Radio({ onChange, planAction }: { onChange: (e: React.ChangeEvent<HTMLInputElement>) => void , planAction: PlanAction | null}) {
     const [selectedValue, setSelectedValue] = useState<string>('NOT REQUIRED');
 
     // Handle change event for the radio group
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedValue(event.target.value);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedValue(e.target.value);
     };
 
     return <>
@@ -22,7 +23,7 @@ function Radio() {
                     type="radio"
                     name="plantModification"
                     value="REQUIRED"
-                    checked={selectedValue === 'REQUIRED'}
+                    checked={selectedValue === 'REQUIRED' || !!planAction?.file}
                     onChange={handleChange}
                     className="w-4 h-4 text-blue-600  bg-gray-100 border-gray-300"
                 />
@@ -53,8 +54,10 @@ function Radio() {
                 </label>
             </div>
         </div>
-        {selectedValue === 'REQUIRED' && <><Label htmlFor='' >Add attachment</Label>
-            <Input className='w-1/2' type='file' name='file' /></>}
+        <div className={`${selectedValue === 'REQUIRED' ? ' block' : 'hidden' }`}>
+        <Label htmlFor='' >Add attachment</Label>
+        <Input onChange={(e) => onChange(e)} className='w-1/2' type='file' name='file' />
+    </div >
     </>
 
 

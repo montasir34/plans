@@ -11,11 +11,11 @@ import {
 import { FaPercent } from "react-icons/fa";
 import { Label } from "./ui/label";
 
-export default function SelectScrollable() {
+export default function SelectScrollable({defaultValue} : {defaultValue?: string}) {
     return <div>
         <Label htmlFor="">Weight</Label>
         <div className="flex gap-1 items-center">
-            <Select>
+            <Select defaultValue={defaultValue} name="weight">
                 <SelectTrigger className="w-[280px]">
                     <SelectValue placeholder="Select a weight" />
                 </SelectTrigger>

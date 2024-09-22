@@ -17,11 +17,11 @@ export default function CreatePlanLayout({ children }: { children: React.ReactNo
                     <h1 className="text-xs text-[#CB8C06] font-semibold">Create plan</h1>
                 </div>
                 <AnimatePresence>
-                    {(programpath || evaluationpath || descisionpath) && (
+                    {(programpath || evaluationpath || descisionpath ) && (
                         <motion.div
 
                             initial={{ width: 0 }}
-                            animate={{ width: programpath ? '100px' : evaluationpath ? '200px' : '300px'}}
+                            animate={{ width: programpath ? '100px' : evaluationpath ? '200px' :  '320px'}}
                             exit={{ width: 0 }}
                             transition={{ duration: 1 }}
                             className={` absolute left-8 top-[38%]  border-b-2 h-0 -z-10 border-[#CB8C06]`}>
@@ -30,7 +30,7 @@ export default function CreatePlanLayout({ children }: { children: React.ReactNo
                     }
                 </AnimatePresence>
                 <AnimatePresence>
-                    {(programpath || evaluationpath || descisionpath) && <div className="flex flex-col items-center justify-center">
+                    {(programpath || evaluationpath || descisionpath ) && <div className="flex flex-col items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -48,7 +48,7 @@ export default function CreatePlanLayout({ children }: { children: React.ReactNo
                     }
                 </AnimatePresence>
                 <AnimatePresence>
-                    {(evaluationpath || descisionpath) && <div className="flex flex-col items-center justify-center">
+                    {(evaluationpath || descisionpath ) && <div className="flex flex-col items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -67,7 +67,7 @@ export default function CreatePlanLayout({ children }: { children: React.ReactNo
                     }
                 </AnimatePresence>
                 <AnimatePresence>
-                    { descisionpath && <div className="flex flex-col items-center justify-center">
+                    {( descisionpath) && <div className="flex flex-col items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -85,8 +85,9 @@ export default function CreatePlanLayout({ children }: { children: React.ReactNo
                     </div>
                     }
                 </AnimatePresence>
+                
             </div>
-            <div className='relative p-4 w-[80%] h-[66%] rounded-md border-2 border-[#CB8C06]'>
+            <div className='relative p-4  w-[80%] h-[66%] rounded-md border-2 border-[#CB8C06]'>
                 {children}
             </div>
         </div>

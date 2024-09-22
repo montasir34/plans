@@ -1,27 +1,24 @@
-'use client'
-import { Button } from "@/components/ui/button";
-import Header from "@/components/ui/Header";
-import { useState } from "react";
 
-type variant = "LOGIN" | "REGISTER"
-export default function Home() {
-  const [variant, setVariant] = useState<variant>('LOGIN')
+import Header from "@/components/ui/Header";
+import LoginForm from "@/components/ui/loginForm";
+import { cookies } from "next/headers";
+import jwt from 'jsonwebtoken'
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const cookiesStore = cookies()
+  const token = cookiesStore.get('token')?.value
+  if(token){
+    const decoded = await jwt.verify(`${token}`, process.env.SECRET_KEY as string);
+    if(decoded){
+      redirect('/main')
+    }
+  }
+  
   return <div className="w-full h-screen bg-slate-100">
     <Header>
       <div></div>
     </Header>
-    <form className="bg-white shadow-md flex flex-col gap-2 m-auto w-52 relative top-1/4    rounded-md p-2">
-      <h1 className="font-bold text-xl mb-2 mt-1">{variant === 'LOGIN' ? 'Login' : 'Register'}</h1>
-      <input className="outline-none h-8 pl-2 border-b-2 border-yellow-300" name="username" type="text" placeholder="Username" />
-      {variant === 'REGISTER' && (
-        <input className="outline-none h-8 pl-2 border-b-2 border-yellow-300" name="email" type="email" placeholder="Email" />
-      )}
-      <input className="outline-none h-8 pl-2 border-b-2 border-yellow-300" name="password" type="password" placeholder="password" />
-      <Button className="bg-[#CB8C06] hover:bg-[#8c6205]">sign in</Button>
-      <p onClick={() => setVariant(p => p === 'LOGIN' ? 'REGISTER' : 'LOGIN')}
-        className="text-xs mt-3 text-blue-600 underline underline-offset-2 hover:text-blue-800 cursor-pointer">
-        {variant === 'LOGIN' ? 'you dont have an account ?' : 'Already have an account ?'}
-      </p>
-    </form>
+    <LoginForm />
   </div>
 }

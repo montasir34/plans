@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from 'next/font/google'
+import { Toaster } from "@/components/ui/toaster";
+
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({
@@ -25,17 +27,19 @@ export const metadata: Metadata = {
   description: "plan plan",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body
         className={`${inter.className} select-none antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

@@ -13,10 +13,99 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  password String
-  email String
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  username     String
+  password     String
+  email        String         @unique
+  role         Role
+  notification Notification[]
+  plans        Plan[]
+  createdAt    DateTime       @default(now())
+}
+
+model Notification {
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  notification_type Notification_type
+  content           String
+  showed            Boolean           @default(false)
+  planId            String            @db.ObjectId
+  createdAt         DateTime          @default(now())
+  User              User?             @relation(fields: [userId], references: [id])
+  userId            String?           @db.ObjectId
+}
+
+enum Notification_type {
+  DESCISION
+  EVALUATE
+  NEW_PLAN
+}
+
+model Program {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  milestone   String
+  description String?
+  start_date  DateTime?
+  end_date    DateTime?
+  weight      Int?
+  status      Program_status @default(NOT_DUE)
+  createdAt   DateTime       @default(now())
+  Plan        Plan?          @relation(fields: [planId], references: [id])
+  planId      String?        @db.ObjectId
+}
+
+enum Program_status {
+  NOT_DUE
+  OPEN
+  CLOSE
+}
+
+model Plan {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  image       String?
+  file        String?
+  reviews     Review[]
+  programs    Program[]
+  descision   Descision?
+  User        User?      @relation(fields: [userId], references: [id])
+  userId      String?    @db.ObjectId
+  createdAt   DateTime   @default(now())
+}
+
+model Review {
+  id                      String   @id @default(auto()) @map("_id") @db.ObjectId
+  reviewer_id             String   @db.ObjectId
+  reviewer_username       String
+  environment_impact      Int?
+  financial_impact        Int?
+  business_impact         Int?
+  workforce_or_society    Int?
+  resource_management     Int?
+  innovation_and_planning Int?
+  justification           String?
+  status                  Status
+  Plan                    Plan?    @relation(fields: [planId], references: [id])
+  planId                  String?  @db.ObjectId
+  createdAt               DateTime @default(now())
+}
+
+enum Status {
+  ACCEPTED
+  NEED_ENHANCEMENT
+  REJECTED
+}
+
+enum Descision {
+  APPROVED
+  POSTPONED
+  REJECTED
+  VALIDATION_REQUIRED
+}
+
+enum Role {
+  MANAGER
+  SUPERVISOR
+  EMPLOYER
 }
